@@ -14,7 +14,7 @@ spring:
     pathmatch:
       matching-strategy: ant_path_matcher
 mybatis:
-  mapper-locations: classpath:mapper/*.xml  
+  mapper-locations: classpath:mapper/*.xml
 # mybatis 的 后台sql打印
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
