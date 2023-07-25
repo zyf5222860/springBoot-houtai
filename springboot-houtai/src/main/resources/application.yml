@@ -1,0 +1,25 @@
+server:
+  port: 9090
+spring:
+  profiles:
+    active:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/fan?serverTimezone=GMT%2b8
+    username: root
+    password: root
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+# mybatis 的 后台sql打印
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# mybatis 的 后台sql打印
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#swagger启动配置
