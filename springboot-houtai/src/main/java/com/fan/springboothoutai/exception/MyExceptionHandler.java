@@ -6,15 +6,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
-public class GolbalExceptionHandler {
+public class MyExceptionHandler {
+
     /**
-     * 全局异常处理器，针对业务异常
-     * @param se
-     * @return
+     * 如果抛出的是ServiceException,则调用该方法
      */
+
+
     @ExceptionHandler(ServiceException.class)
     @ResponseBody
     public Result handle(ServiceException se){
-        return Result.fail();
-    }
+        return Result.build(se.getCode(),se.getMessage());
 }
+
+}
+

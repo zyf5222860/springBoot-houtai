@@ -1,15 +1,19 @@
 package com.fan.springboothoutai.controller;
 
 import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.poi.excel.ExcelReader;
+
+ import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fan.springboothoutai.common.Result;
 import com.fan.springboothoutai.controller.dto.UserDto;
 import com.fan.springboothoutai.entity.User;
 import com.fan.springboothoutai.service.IUserService;
+import com.fan.springboothoutai.utils.TokenUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,6 +36,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
 
     @Resource
@@ -132,6 +137,9 @@ public class UserController {
         if (Strings.isNotEmpty(phone)) {
             queryWrapper.like("phone", phone);
         }
+
+        User currentAdmin = TokenUtils.getCurrentAdmin();
+        log.info(JSONObject.toJSONString(currentAdmin));
         return userService.page(new Page<>(pageNum, pageSize), queryWrapper);
     }
 

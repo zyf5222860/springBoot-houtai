@@ -3,6 +3,7 @@ package com.fan.springboothoutai.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.log.Log;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fan.springboothoutai.common.Constants;
 import com.fan.springboothoutai.common.Result;
 import com.fan.springboothoutai.common.ResultCodeEnum;
 import com.fan.springboothoutai.controller.dto.UserDto;
@@ -11,6 +12,7 @@ import com.fan.springboothoutai.exception.ServiceException;
 import com.fan.springboothoutai.mapper.UserMapper;
 import com.fan.springboothoutai.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.fan.springboothoutai.utils.TokenUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.regex.Matcher;
@@ -32,16 +34,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public User login(UserDto userDto) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username",userDto.getUsername());
         queryWrapper.eq("password",userDto.getPassword());
         User one = null;
         try {
             one = getOne(queryWrapper);
             if (one != null){
+                 //设置token
+                String token = TokenUtils.genToken(one.getId().toString(), one.getPassword());
+                userDto.setToken(token);
                  return one;
             }else {
-                throw new ServiceException(Result.loginError());
+                throw new ServiceException(Constants.Code_401,"用户不存在");
             }
         } catch (Exception e) {
             LOG.error(e.getMessage());

@@ -22,4 +22,5 @@ public class UserDto implements Serializable {
     private String email;
     @Alias("电话")
     private String phone;
+    private String token;
 }

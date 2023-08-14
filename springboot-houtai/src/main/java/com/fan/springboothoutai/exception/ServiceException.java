@@ -1,13 +1,16 @@
 package com.fan.springboothoutai.exception;
 
-import com.fan.springboothoutai.common.Result;
-
+import lombok.Getter;
 /**
  * 自定义异常
  */
+@Getter
 public class ServiceException extends RuntimeException{
 
-    public ServiceException(Result result){
-        super(result.getMessage());
+    private Integer code;
+
+    public ServiceException(Integer code,String msg){
+        super(msg);
+        this.code = code;
     }
 }
