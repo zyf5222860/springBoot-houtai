@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import lombok.Data;
 import lombok.Getter;
@@ -51,7 +52,7 @@ public class User implements Serializable {
     @Alias("地址")
     private String address;
     @Alias("创建时间")
-    private LocalDateTime creatTime;
+    private Date creatTime;
     @Alias("头像地址")
     @TableField("avatarUrl")
     private String avatarUrl;

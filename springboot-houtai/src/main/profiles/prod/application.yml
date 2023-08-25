@@ -24,4 +24,10 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
+# 文件上传路径
+files:
+  upload:
+    path: D:/前后端work/pic/
+    url: http://39.108.2.123:9090/file/
+
 #swagger启动配置

@@ -45,7 +45,7 @@ public Boolean save(@RequestBody ${entity} ${table.entityPath}){
         return ${table.entityPath}Service.saveOrUpdate(${table.entityPath});
         }
 
-@DeleteMapping("/{id}")
+@PostMapping("/{id}")
 public Boolean delete(@PathVariable Integer id){
         return ${table.entityPath}Service.removeById(id);
         }
